@@ -15,9 +15,14 @@ public class FileTypeTests {
 
     @Test
     public void ifIndicatedExtensionIsPngAndFileTypeisJpgThenInauthentic() throws IOException {
-        String result = fsc.fileChecker("src/main/resources/static/6S3T53JOWFBGHAVWNJBDWH5MP4.png");
-        assertEquals(result,
+        assertEquals(fsc.fileChecker("src/main/resources/static/6S3T53JOWFBGHAVWNJBDWH5MP4.png"),
                 "Extension is png, whereas file type is jpg.");
+    }
+
+    @Test
+    public void ifExtensionTxtButNotTxtThenInauthentic() throws IOException {
+        assertEquals(fsc.fileChecker("src/main/resources/static/fakeOgg2.txt"),
+                "Extension is txt, whereas file type is ogg.");
     }
 
     @Test
@@ -30,6 +35,18 @@ public class FileTypeTests {
     public void ifFileExtensionNotSupportedThenExceptionThrown() {
         assertThrows(UnsupportedExtensionException.class, () ->
                 fsc.fileChecker("src/main/resources/static/ogg1.ogg"));
+    }
+
+    @Test
+    public void ifFileUnreadableThenIOException() {
+        assertThrows(IOException.class, () ->
+                fsc.fileChecker("src/main/resources/static/asdfasdf.txt"));
+    }
+
+    @Test
+    public void ifNoFileExtensionThenExceptionThrown() {
+        assertThrows(UnsupportedExtensionException.class, () ->
+                fsc.fileChecker("src/main/resources/static/Procfile"));
     }
 
     @Test
