@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="daa0b8b1-ef75-4afc-a5b1-fa7e2996f31e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/6S3T53JOWFBGHAVWNJBDWH5MP4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fakeOgg1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fakeOgg2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/goldenration.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/ogg1.ogg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/sanders.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/svaneti-mountains.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/test.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/pl/epam/challenge/FileTypeTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/epam/challenge/util/FileSignatureChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/epam/challenge/util/FileSignatureChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/epam/challenge/HelloWorld.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pl/epam/challenge/HelloWorldTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +85,7 @@
       <updated>1584381050361</updated>
       <workItem from="1584381053412" duration="1804000" />
       <workItem from="1584425731097" duration="633000" />
-      <workItem from="1584552684893" duration="765000" />
+      <workItem from="1584552684893" duration="1324000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,1 @@
+We accept drawings of your design, if you decide to draw anything before you start coding. Just photograph them and add them to GitHub repository, with a text file explaining what is on a drawing (if needed). This is **NOT** a required step.
