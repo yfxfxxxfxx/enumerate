@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class FileSignatureChecker {
 
+    String formatter;
+
     // Map.of() used for readability, if number of keys grows beyond 10
     // can replace with Arrays.stream().collect(Collectors.toMap())
     public static final Map<String, String> KNOWN_SIGNATURES = Map.of(
@@ -18,11 +20,19 @@ public class FileSignatureChecker {
             "pdf", "25 50 44 46 2d"
     );
 
+    public FileSignatureChecker(String formatter) {
+        this.formatter = formatter;
+    }
+
+    public String getFormatter() {
+        return formatter;
+    }
+
     public String fileChecker(String filename) {
 
         String currentFileExtension = FileUtils
                 .getFileExtension(filename)
-                .orElse("File extension not recognized.");
+                .orElse("");
 
         switch (currentFileExtension) {
             case "jpg":

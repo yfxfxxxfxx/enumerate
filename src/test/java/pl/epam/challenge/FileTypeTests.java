@@ -13,7 +13,7 @@ public class FileTypeTests {
 
     @Before
     public void init() {
-        fsc = new FileSignatureChecker();
+        fsc = new FileSignatureChecker("File %d: \n%s");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class FileTypeTests {
 
     @Test
     public void ifFileExtensionAccurateThenSuccess() {
-        assertEquals(fsc.fileChecker("src/main/resources/static/test.jpg"),
+        assertEquals(fsc.fileChecker("src/main/resources/static/svaneti-mountains.jpg"),
                         "File extension authentic.");
     }
 }
