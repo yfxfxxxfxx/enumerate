@@ -3,6 +3,7 @@ package pl.epam.challenge.util;
 import pl.epam.challenge.exceptions.UnsupportedExtensionException;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
 public class FileSignatureChecker {
@@ -40,12 +41,44 @@ public class FileSignatureChecker {
         switch (currentFileExtension) {
             case "jpg":
             case "gif":
-                return "ok";
+            case "png":
+                return checkKnownSignatures(bytes,currentFileExtension);
             case "txt":
                 return "ok txt";
             default:
                 throw new UnsupportedExtensionException(currentFileExtension);
         }
+    }
+
+    public String checkKnownSignatures(byte[] bytes, String currentFileExtension) {
+        String fileType = "unidentified";
+        String inauthenticExtensionFormatter = "Extension is %s, whereas file type is %s.";
+
+        String[] knownSignature = KNOWN_SIGNATURES.containsKey(currentFileExtension) ?
+                KNOWN_SIGNATURES.get(currentFileExtension).split(" ") :
+                new String[0];
+
+        String[] unknownSignature = bytesToHex(bytes).split(" ");
+
+        if (Arrays.equals(knownSignature,
+                Arrays.copyOfRange(unknownSignature, 0, knownSignature.length))) {
+            return "File extension authentic.";
+        }
+
+        for (String s : FileSignatureChecker.KNOWN_SIGNATURES.keySet()) {
+            if (s.equals(currentFileExtension)) {
+                continue;
+            }
+            knownSignature = KNOWN_SIGNATURES.get(s).split(" ");
+
+            if (Arrays.equals(knownSignature, Arrays.copyOfRange(unknownSignature, 0, knownSignature.length))) {
+                fileType = s;
+                break;
+            }
+        }
+
+        return String.format(inauthenticExtensionFormatter, currentFileExtension, fileType);
+
     }
 
     public static String bytesToHex(byte[] bytes) {

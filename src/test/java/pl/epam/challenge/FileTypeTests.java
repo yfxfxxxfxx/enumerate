@@ -1,8 +1,8 @@
 package pl.epam.challenge;
 
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import pl.epam.challenge.exceptions.UnsupportedExtensionException;
 import pl.epam.challenge.util.FileSignatureChecker;
 
 import java.io.IOException;
@@ -11,16 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FileTypeTests {
 
-    private FileSignatureChecker fsc;
-
-    @Before
-    public void init() {
-        fsc = new FileSignatureChecker("File %d: \n%s");
-    }
+    private FileSignatureChecker fsc = new FileSignatureChecker("File %d: \n%s");
 
     @Test
     public void ifIndicatedExtensionIsPngAndFileTypeisJpgThenInauthentic() throws IOException {
-        assertEquals(fsc.fileChecker("src/main/resources/static/6S3T53JOWFBGHAVWNJBDWH5MP4.png"),
+        String result = fsc.fileChecker("src/main/resources/static/6S3T53JOWFBGHAVWNJBDWH5MP4.png");
+        assertEquals(result,
                 "Extension is png, whereas file type is jpg.");
     }
 
@@ -32,7 +28,7 @@ public class FileTypeTests {
 
     @Test
     public void ifFileExtensionNotSupportedThenExceptionThrown() {
-        assertThrows(Exception.class, () ->
+        assertThrows(UnsupportedExtensionException.class, () ->
                 fsc.fileChecker("src/main/resources/static/ogg1.ogg"));
     }
 
