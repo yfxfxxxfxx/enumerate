@@ -3,6 +3,8 @@ package pl.epam.challenge;
 import pl.epam.challenge.exceptions.UnsupportedExtensionException;
 import pl.epam.challenge.util.FileSignatureChecker;
 
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         FileSignatureChecker fsc = new FileSignatureChecker("File %d: \n%s");
@@ -19,6 +21,11 @@ public class Main {
                         fsc.getFormatter(),
                         currentArg,
                         "File extension not recognized: " + e.getMessage()));
+            } catch (IOException ioe) {
+                System.out.println(String.format(
+                        fsc.getFormatter(),
+                        currentArg,
+                        "Unable to read file: " + ioe.getMessage()));
             }
 
             currentArg++;

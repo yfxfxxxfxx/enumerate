@@ -2,6 +2,7 @@ package pl.epam.challenge.util;
 
 import pl.epam.challenge.exceptions.UnsupportedExtensionException;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class FileSignatureChecker {
@@ -28,11 +29,13 @@ public class FileSignatureChecker {
         return formatter;
     }
 
-    public String fileChecker(String filename) {
+    public String fileChecker(String filename) throws IOException {
 
         String currentFileExtension = FileUtils
                 .getFileExtension(filename)
                 .orElse("");
+
+        byte[] bytes = FileUtils.getByteSignature(filename);
 
         switch (currentFileExtension) {
             case "jpg":
