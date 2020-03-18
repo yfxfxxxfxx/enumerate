@@ -1,6 +1,8 @@
 package pl.epam.challenge.util;
 
 import pl.epam.challenge.exceptions.UnsupportedExtensionException;
+import pl.epam.challenge.validators.TxtValidator;
+import pl.epam.challenge.validators.TypeValidator;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,6 +34,8 @@ public class FileSignatureChecker {
 
     public String fileChecker(String filename) throws IOException {
 
+        TypeValidator typeValidator;
+
         String currentFileExtension = FileUtils
                 .getFileExtension(filename)
                 .orElse("");
@@ -42,9 +46,10 @@ public class FileSignatureChecker {
             case "jpg":
             case "gif":
             case "png":
-                return checkKnownSignatures(bytes,currentFileExtension);
+                return checkKnownSignatures(bytes, currentFileExtension);
             case "txt":
-                return "ok txt";
+                typeValidator = new TxtValidator();
+                return typeValidator.verifyFileType(bytes) ? "File extension authentic." : checkKnownSignatures(bytes);
             default:
                 throw new UnsupportedExtensionException(currentFileExtension);
         }
@@ -79,6 +84,27 @@ public class FileSignatureChecker {
 
         return String.format(inauthenticExtensionFormatter, currentFileExtension, fileType);
 
+    }
+
+    // overloaded method to avoid unnecessary work when extension is `txt`, since
+    // we already know that KNOWN_SIGNATURES does not contain `txt`
+    public String checkKnownSignatures(byte[] bytes) {
+        String fileType = "unidentified";
+        String inauthenticExtensionFormat = "Extension is %s, whereas file type is %s.";
+
+        String[] knownSignature;
+        String[] unknownSignature = bytesToHex(bytes).split(" ");
+
+        for (String s : FileSignatureChecker.KNOWN_SIGNATURES.keySet()) {
+            knownSignature = KNOWN_SIGNATURES.get(s).split(" ");
+
+            if (Arrays.equals(knownSignature, Arrays.copyOfRange(unknownSignature, 0, knownSignature.length))) {
+                fileType = s;
+                break;
+            }
+        }
+
+        return String.format(inauthenticExtensionFormat, "txt", fileType);
     }
 
     public static String bytesToHex(byte[] bytes) {

@@ -1,4 +1,6 @@
 pl\epam\challenge\util\FileSignatureChecker.class
 pl\epam\challenge\util\FileUtils.class
+pl\epam\challenge\validators\TxtValidator.class
 pl\epam\challenge\Main.class
 pl\epam\challenge\exceptions\UnsupportedExtensionException.class
+pl\epam\challenge\validators\TypeValidator.class
